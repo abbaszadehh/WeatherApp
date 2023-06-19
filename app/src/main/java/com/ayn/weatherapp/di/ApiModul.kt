@@ -3,6 +3,7 @@ package com.ayn.weatherapp.di
 import com.ayn.weatherapp.BuildConfig
 import com.ayn.weatherapp.Const.APIURL
 import com.ayn.weatherapp.model.WeatherModel
+import com.ayn.weatherapp.service.WeatherService
 import com.google.gson.Gson
 import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import dagger.Module
@@ -21,7 +22,7 @@ class ApiModul {
 
     @Singleton
     @Provides
-    fun provideOkHttpClientBuilder(gson : Gson): OkHttpClient.Builder {
+    fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
         val okHttpBuilder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG)
             okHttpBuilder.addInterceptor(OkHttpProfilerInterceptor())
@@ -39,6 +40,6 @@ class ApiModul {
 
     @Singleton
     @Provides
-    fun provideWeatherService(retrofit: Retrofit): WeatherModel = retrofit.create()
+    fun provideWeatherService(retrofit: Retrofit): WeatherService = retrofit.create()
 
 }
